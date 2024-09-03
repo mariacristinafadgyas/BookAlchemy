@@ -25,6 +25,7 @@ class Book(db.Model):
     isbn = db.Column(db.String(30), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     publication_year = db.Column(db.Integer, nullable=False)
+    cover_image = db.Column(db.String(255))
 
     def __repr__(self):
         return f"Book: {self.title}, published in {self.publication_year}"

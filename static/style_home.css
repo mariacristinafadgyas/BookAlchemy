@@ -1,0 +1,162 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root {
+  --header-height: 3rem;
+  --font-semi: 600;
+  /*===== Colors =====*/
+  --hue-color: 58; /* Base hue for colors */
+  --light-background: hsl(var(--hue-color), 90%, 96%); /* Lighter shade for background */
+  --mid-background: hsl(var(--hue-color), 80%, 85%); /* Mid-tone shade for contrast */
+  --dark-text: hsl(var(--hue-color), 40%, 10%); /* Dark shade for text */
+  --darker-text: hsl(var(--hue-color), 30%, 5%); /* Darker shade for contrast */
+  --button-color: hsl(var(--hue-color), 80%, 50%); /* Lively button color */
+  --button-hover-color: hsl(var(--hue-color), 80%, 45%); /* Button color on hover */
+  --flash-bg-color: hsl(var(--hue-color), 90%, 95%); /* Flash message background color */
+  --flash-border-color: hsl(var(--hue-color), 80%, 75%); /* Flash message border color */
+
+  /*===== Fonts and Typography =====*/
+  --body-font: "Poppins", sans-serif;
+  --big-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: 0.9rem;
+  --smaller-font-size: 0.75rem;
+
+  /*===== Margins =====*/
+  --mb-2: 1rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+}
+
+.header {
+  background: url('/static/library.jpeg') no-repeat center center;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative; /* Ensure proper positioning context */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0px;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  position: absolute;
+  bottom: 0px;
+  z-index: 1; /* Ensure it appears above the image */
+}
+
+body {
+    font-family: var(--body-font);
+    background: var(--light-background);
+    color: var(--dark-text);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    padding: 0px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.table-container {
+    background: var(--mid-background);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--mb-4);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--mid-background);
+}
+
+th {
+    background: hsl(var(--hue-color), 70%, 70%);
+    color: hsl(var(--hue-color), 10%, 10%);
+    font-weight: var(--font-semi);
+}
+
+td {
+    background: var(--mid-background);
+    color: var(--dark-text);
+}
+
+button {
+    padding: 12px 20px;
+    background: var(--button-color);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+button:hover {
+    background: var(--button-hover-color);
+    transform: translateY(-2px);
+}
+
+.flash-message {
+    background: var(--flash-bg-color);
+    color: var(--darker-text);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: var(--mb-4);
+    border-left: 4px solid var(--flash-border-color);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Keyframe animation for flash messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

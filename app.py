@@ -3,6 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_migrate import Migrate
+from get_cover_image import get_cover_image
 import os
 
 
@@ -22,6 +23,12 @@ migrate = Migrate(app, db)
 # # Creates the tables defined in the models
 # with app.app_context():
 #     db.create_all()
+
+
+@app.route('/')
+def home():
+    books = Book.query.all()  # Query all books from the database
+    return render_template('home.html', books=books)
 
 
 @app.route('/add_author', methods=['GET', 'POST'])
@@ -82,7 +89,12 @@ def add_books():
             flash('Selected author does not exist.')
             return redirect(url_for('add_books'))
 
-        new_book = Book(title=title, author=author, isbn=isbn, publication_year=publication_year)
+        # Fetch the cover image URL using the ISBN
+        cover_image = get_cover_image(isbn)
+        if cover_image is None:
+            cover_image = url_for('static', filename='book.jpeg')
+
+        new_book = Book(title=title, author=author, isbn=isbn, publication_year=publication_year, cover_image=cover_image)
 
         db.session.add(new_book)
         db.session.commit()
