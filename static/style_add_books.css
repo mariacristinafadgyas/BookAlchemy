@@ -1,0 +1,151 @@
+/*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root {
+  --header-height: 3rem;
+  --font-semi: 600;
+  /*===== Colors =====*/
+  --hue-color: 58; /* 224 Base hue for colors */
+  --first-color: hsl(var(--hue-color), 89%, 97%); /* Light shade for background */
+  --second-color: hsl(var(--hue-color), 6%, 82%); /* Light gray */
+  --third-color: hsl(var(--hue-color), 16%, 1%); /* Dark shade for text */
+  --forth-color: hsl(var(--hue-color), 1%, 20%); /* Darker shade for contrast */
+  --button-color: hsl(var(--hue-color), 89%, 60%); /* Button color using hue */
+  --flash-bg-color: hsl(var(--hue-color), 89%, 90%); /* Flash message background color */
+  --flash-border-color: hsl(var(--hue-color), 89%, 70%); /* Flash message border color */
+
+
+  /*===== Fonts and Typography =====*/
+  --body-font: "Poppins", sans-serif;
+  --big-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: 0.9rem;
+  --smaller-font-size: 0.75rem;
+
+  /*===== Margins =====*/
+  --mb-2: 1rem;
+  --mb-4: 2rem;
+  --mb-5: 2.5rem;
+  --mb-6: 3rem;
+}
+
+body {
+    font-family: var(--body-font);
+    background: #f4f7f9;
+    color: var(--third-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 40px;
+}
+
+.add_book_container {
+    background: var(--first-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 90%;
+    text-align: left;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.add_book_container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: var(--big-font-size);
+    color: var(--third-color);
+    border-bottom: 2px solid var(--second-color);
+    padding-bottom: 10px;
+    text-align: left; /* Centers the title horizontally */
+}
+
+form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Ensures responsiveness */
+    gap: 15px;
+    justify-content: space-between; /* Distributes form elements evenly */
+    align-items: center;
+}
+
+label {
+    font-size: var(--normal-font-size);
+    color: var(--third-color);
+}
+
+input[type="text"], input[type="date"] {
+    padding: 12px;
+    border: 1px solid var(--second-color);
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: var(--first-color);
+    flex: 1; /* Makes input fields expand equally */
+}
+
+input[type="text"]:focus, input[type="date"]:focus {
+    border-color: var(--button-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    background-color: #ffffff;
+}
+
+button {
+    padding: 12px 20px;
+    background: var(--button-color);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+button:hover {
+    background: hsl(var(--hue-color), 89%, 50%);
+    transform: translateY(-2px);
+}
+
+.flash-message {
+    background: var(--flash-bg-color);
+    color: var(--forth-color);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: var(--mb-4);
+    border-left: 4px solid var(--flash-border-color);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Keyframe animation for flash messages */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

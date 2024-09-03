@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style_add_books.css">
+    <title>Add a book</title>
+</head>
+<body>
+    <div class="add_book_container">
+    <h1>Add Book</h1>
+
+        <form method="POST" action="{{ url_for('add_books') }}">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" name="isbn" required><br><br>
+
+            <label for="publication_year">Publication year:</label>
+            <input type="text" id="publication_year" name="publication_year" min="1000" max="{{ current_year }}" required><br><br>
+
+            <label for="author">Author:</label>
+            <select id="author_id" name="author_id" required>
+                <option value="">Select an Author</option>
+                {% for author in authors %}
+                    <option value="{{ author.author_id }}">{{ author.name }}</option>
+                {% endfor %}
+            </select><br><br>
+
+            <button type="submit">Add Book</button>
+        </form>
+    </div>
+
+    <br>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <script src="add_authors.js"></script>
+
+</body>
+</html>

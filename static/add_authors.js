@@ -1,0 +1,1 @@
+document.getElementById('publication_year').max = new Date().getFullYear();
