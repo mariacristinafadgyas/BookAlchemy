@@ -66,6 +66,62 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+.sort_items {
+    background: var(--light-background);
+    border-radius: 8px;
+    padding: 10px;
+    margin: var(--mb-4) 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort_items form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.sort_items label {
+    font-size: var(--normal-font-size);
+    color: var(--dark-text);
+    margin-right: 10px;
+}
+
+.sort_items select {
+    padding: 8px 12px;
+    border: 1px solid var(--mid-background);
+    border-radius: 4px;
+    font-size: var(--normal-font-size);
+    margin-right: 20px; /* Space between selects */
+    background: #fff;
+    color: var(--dark-text);
+    transition: border-color 0.3s ease;
+}
+
+.sort_items select:focus {
+    border-color: var(--button-color);
+    outline: none;
+}
+
+.sort_items button {
+    padding: 10px 20px;
+    background: var(--button-color);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.sort_items button:hover {
+    background: var(--button-hover-color);
+    transform: translateY(-2px);
+}
 
 .container {
     padding: 0px;

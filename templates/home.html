@@ -12,6 +12,25 @@
         <h1>My Library</h1>
     </div>
 
+    <div class="sort_items">
+        <form method="get" action="{{ url_for('home') }}">
+            <label for="sort_by">Sort by:</label>
+            <select id="sort_by" name="sort_by">
+                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
+                <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Author</option>
+                <option value="publication_year" {% if sort_by == 'publication_year' %}selected{% endif %}>Publication Year</option>
+            </select>
+
+            <label for="sort_order">Order:</label>
+            <select id="sort_order" name="sort_order">
+                <option value="asc" {% if sort_order == 'asc' %}selected{% endif %}>Ascending</option>
+                <option value="desc" {% if sort_order == 'desc' %}selected{% endif %}>Descending</option>
+            </select>
+
+            <button type="submit">Sort</button>
+        </form>
+    </div>
+
     <div class="container">
         <div class="table-container">
             <table>

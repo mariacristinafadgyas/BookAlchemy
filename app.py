@@ -27,8 +27,23 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
-    books = Book.query.all()  # Query all books from the database
-    return render_template('home.html', books=books)
+    sort_by = request.args.get('sort_by', 'title')  # Default to sorting by title
+    sort_order = request.args.get('sort_order', 'asc')  # Default to ascending order
+
+    # Map sorting field to model attribute
+    sort_field = {
+        'title': Book.title,
+        'author': Author.name,
+        'publication_year': Book.publication_year
+    }.get(sort_by, Book.title)
+
+    # Determine the sort direction
+    if sort_order == 'desc':
+        books = Book.query.join(Author).order_by(sort_field.desc()).all()
+    else:
+        books = Book.query.join(Author).order_by(sort_field).all()
+
+    return render_template('home.html', books=books, sort_by=sort_by, sort_order=sort_order)
 
 
 @app.route('/add_author', methods=['GET', 'POST'])
