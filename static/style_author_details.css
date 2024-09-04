@@ -11,9 +11,8 @@
   --second-color: hsl(var(--hue-color), 6%, 82%); /* Light gray */
   --third-color: hsl(var(--hue-color), 16%, 1%); /* Dark shade for text */
   --forth-color: hsl(var(--hue-color), 1%, 20%); /* Darker shade for contrast */
+  --fifth-color: hsl(var(--hue-color), 89%, 90%); /* Shade for list */
   --button-color: hsl(var(--hue-color), 89%, 60%); /* Button color using hue */
-  --flash-bg-color: hsl(var(--hue-color), 89%, 90%); /* Flash message background color */
-  --flash-border-color: hsl(var(--hue-color), 89%, 70%); /* Flash message border color */
 
 
   /*===== Fonts and Typography =====*/
@@ -43,7 +42,7 @@ body {
     padding-top: 40px;
 }
 
-.add_author_container {
+.author-detail-container {
     background: var(--first-color);
     padding: 30px;
     border-radius: 8px;
@@ -54,11 +53,11 @@ body {
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.add_author_container:hover {
+.author-detail-container:hover {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.author_header {
+.author_detail_header {
   background: url('/static/library.jpeg') no-repeat center center;
   background-size: cover;
   height: 200px;
@@ -73,7 +72,7 @@ body {
   padding: 0px;
 }
 
-.author_header h1 {
+.author_detail_header h1 {
   color: #fff;
   font-size: 3rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -108,73 +107,28 @@ body {
     padding: 0 10px; /* Adds padding to the link */
 }
 
-form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; /* Ensures responsiveness */
-    gap: 15px;
-    justify-content: space-between; /* Distributes form elements evenly */
-    align-items: center;
+.author-info p {
+    margin: 5px 0;
+    font-size: 16px;
 }
 
-label {
-    font-size: var(--normal-font-size);
-    color: var(--third-color);
+h2 {
+    margin-top: 20px;
+    font-size: var(--h2-font-size);
+    color: var(--forth-color);
 }
 
-input[type="text"], input[type="date"] {
-    padding: 12px;
-    border: 1px solid var(--second-color);
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    background-color: var(--first-color);
-    flex: 1; /* Makes input fields expand equally */
-}
-
-input[type="text"]:focus, input[type="date"]:focus {
-    border-color: var(--button-color);
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-    background-color: #ffffff;
-}
-
-button {
-    padding: 12px 20px;
-    background: var(--button-color);
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: var(--normal-font-size);
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    flex-shrink: 0; /* Prevents button from shrinking */
-}
-
-button:hover {
-    background: hsl(var(--hue-color), 89%, 50%);
-    transform: translateY(-2px);
-}
-
-.flash-messages {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: var(--flash-bg-color); /* Use a variable or any color of your choice */
-    border-left: 5px solid var(--flash-border-color); /* Optional for a flash message effect */
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.flash-messages-list {
+.book-list {
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-.flash-message {
-    color: var(--darker-text); /* Use a contrasting text color */
-    font-size: var(--normal-font-size); /* Font size consistent with your design */
+.book-list li {
+    background: var(--fifth-color);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 600px) {

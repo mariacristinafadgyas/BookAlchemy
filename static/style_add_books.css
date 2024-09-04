@@ -58,13 +58,54 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-size: var(--big-font-size);
-    color: var(--third-color);
-    border-bottom: 2px solid var(--second-color);
-    padding-bottom: 10px;
-    text-align: left; /* Centers the title horizontally */
+.book_header {
+  background: url('/static/library.jpeg') no-repeat center center;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0px;
+}
+
+.book_header h1 {
+  color: #fff;
+  font-size: 3rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  position: absolute;
+  bottom: 0px;
+  z-index: 1; /* Ensure it appears above the image */
+}
+
+.my_library_button {
+    padding: 12px 20px;
+    background: var(--button-color);
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: var(--normal-font-size);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    flex-shrink: 0; /* Prevents the button from shrinking */
+    text-decoration: none; /* Removes underline */
+}
+
+.my_library_button:hover {
+    background: hsl(var(--hue-color), 89%, 50%);
+    transform: translateY(-2px);
+}
+
+.button-link {
+    color: #fff;
+    text-decoration: none; /* Removes underline */
+    display: block; /* Makes the link fill the button */
+    padding: 0 10px; /* Adds padding to the link */
 }
 
 form {
@@ -114,14 +155,26 @@ button:hover {
     transform: translateY(-2px);
 }
 
-.flash-message {
-    background: var(--flash-bg-color);
-    color: var(--forth-color);
-    padding: 10px;
+.flash-messages {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: var(--flash-bg-color); /* Use a variable or any color of your choice */
+    border-left: 5px solid var(--flash-border-color); /* Optional for a flash message effect */
     border-radius: 4px;
-    margin-bottom: var(--mb-4);
-    border-left: 4px solid var(--flash-border-color);
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.flash-messages-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-message {
+    color: var(--darker-text); /* Use a contrasting text color */
+    font-size: var(--normal-font-size); /* Font size consistent with your design */
 }
 
 @media (max-width: 600px) {

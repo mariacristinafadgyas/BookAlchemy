@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style_author_details.css">
+    <title>Author Detail</title>
+</head>
+<body>
+    <div class="author-detail-container">
+        <div class="author_detail_header">
+            <h1>{{ author.name }}</h1>
+        </div>
+
+        <div class="author-info">
+            <p><strong>Birth Date:</strong> {{ author.birth_date }}</p>
+            {% if author.date_of_death %}
+                <p><strong>Date of Death:</strong> {{ author.date_of_death }}</p>
+            {% else %}
+                <p><strong>Still Alive</strong></p>
+            {% endif %}
+        </div>
+
+        <h2>Books by {{ author.name }}</h2>
+        <ul class="book-list">
+            {% for book in books %}
+                <li>
+                    <h3>{{ book.title }}</h3>
+                    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+                    <p><strong>Publication Year:</strong> {{ book.publication_year }}</p>
+                </li>
+            {% else %}
+                <p>No books found for this author.</p>
+            {% endfor %}
+        </ul>
+
+         <button class="my_library_button">
+             <a href="{{ url_for('home') }}" class="button-link">My Library</a>
+         </button>
+    </div>
+</body>
+</html>

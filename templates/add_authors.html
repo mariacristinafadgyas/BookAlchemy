@@ -8,7 +8,22 @@
 </head>
 <body>
     <div class="add_author_container">
-        <h1>Add Author</h1>
+         <div class="author_header">
+            <h1>Add Author</h1>
+         </div>
+
+         {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                <ul class="flash-messages-list">
+                    {% for message in messages %}
+                        <li class="flash-message">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% endwith %}
+
 
         <form method="POST">
             <label for="name">Name:</label>
@@ -20,18 +35,13 @@
             <label for="date_of_death">Date of Death (YYYY-MM-DD):</label>
             <input type="date" id="date_of_death" name="date_of_death"><br><br>
 
-             <button type="submit">Add Author</button>
+             <button type="submit">Add Author</button><br><br>
+
+            <button class="my_library_button">
+                <a href="{{ url_for('home') }}" class="button-link">My Library</a>
+            </button>
         </form>
     </div>
 
-    <br>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-message">
-          {{ messages[0] }}
-        </div>
-      {% endif %}
-    {% endwith %}
 </body>
 </html>

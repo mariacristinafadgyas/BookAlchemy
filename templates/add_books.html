@@ -8,7 +8,21 @@
 </head>
 <body>
     <div class="add_book_container">
-    <h1>Add Book</h1>
+        <div class="book_header">
+            <h1>Add Book</h1>
+         </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                <ul class="flash-messages-list">
+                    {% for message in messages %}
+                        <li class="flash-message">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        {% endwith %}
 
         <form method="POST" action="{{ url_for('add_books') }}">
             <label for="title">Title:</label>
@@ -28,19 +42,15 @@
                 {% endfor %}
             </select><br><br>
 
-            <button type="submit">Add Book</button>
+            <button type="submit">Add Book</button><br><br>
+
+            <button class="my_library_button">
+                <a href="{{ url_for('home') }}" class="button-link">My Library</a>
+            </button>
         </form>
     </div>
 
     <br>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash-message">
-          {{ messages[0] }}
-        </div>
-      {% endif %}
-    {% endwith %}
 
     <script src="add_authors.js"></script>
 

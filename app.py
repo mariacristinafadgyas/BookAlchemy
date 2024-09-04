@@ -3,7 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_migrate import Migrate
-from get_cover_image import get_cover_image
+from get_cover_image import get_cover_image, get_description
 import os
 
 
@@ -162,6 +162,21 @@ def delete_book(book_id):
         flash(f'An error occurred while trying to delete the book: {str(e)}', 'danger')
 
     return redirect(url_for('home'))
+
+
+@app.route('/author/<int:author_id>')
+def author_details(author_id):
+    author = Author.query.get_or_404(author_id)
+    books = Book.query.filter_by(author_id=author_id).all()
+
+    return render_template('author_details.html', author=author, books=books)
+
+
+@app.route('/book/<int:book_id>', methods=['GET'])
+def book_details(book_id):
+    book = Book.query.get_or_404(book_id)
+
+    return render_template('book_details.html', book=book)
 
 
 if __name__ == "__main__":
