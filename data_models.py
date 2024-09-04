@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import UniqueConstraint
 
 db = SQLAlchemy()  # Creates a db object
 
@@ -9,8 +8,8 @@ class Author(db.Model):
 
     author_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
-    birth_date = db.Column(db.Date)
-    date_of_death = db.Column(db.Date)
+    birth_date = db.Column(db.Date, nullable=False)
+    date_of_death = db.Column(db.Date, nullable=True)
     books = db.relationship('Book', backref='author', lazy=True)
 
     def __repr__(self):

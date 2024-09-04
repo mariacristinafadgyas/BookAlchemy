@@ -60,6 +60,7 @@
                         <th>ISBN</th>
                         <th>Publication Year</th>
                         <th>Author</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,11 @@
                             <td>{{ book.isbn }}</td>
                             <td>{{ book.publication_year }}</td>
                             <td>{{ book.author.name }}</td>
+                            <td>
+                                <form action="{{ url_for('delete_book', book_id=book.book_id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="button">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

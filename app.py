@@ -64,6 +64,9 @@ def add_authors():
 
         # Server-side date format validation and conversion
         date_format = "%Y-%m-%d"
+        birth_date = None
+        date_of_death = None
+
         try:
             if birth_date_str:  # Validate the birthdate
                 birth_date = datetime.strptime(birth_date_str, date_format).date()
@@ -76,6 +79,10 @@ def add_authors():
 
         except ValueError:
             flash("Invalid date format. Please use YYYY-MM-DD.")
+            return redirect(url_for('add_authors'))
+
+        if birth_date and date_of_death and date_of_death < birth_date:
+            flash("The date of death cannot be earlier than the birth date.")
             return redirect(url_for('add_authors'))
 
         new_author = Author(name=name, birth_date=birth_date, date_of_death=date_of_death)
@@ -128,6 +135,33 @@ def add_books():
 
     authors = Author.query.all()  # Fetch all authors from the database
     return render_template('add_books.html', authors=authors)
+
+
+@app.route('/book/<int:book_id>/delete', methods=['POST'])
+def delete_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    author = book.author
+    print(author)
+
+    try:
+        db.session.delete(book)
+        db.session.commit()
+
+        author_books_count = Book.query.filter_by(author_id=author.author_id).count()
+
+        if author_books_count == 0:
+            db.session.delete(author)
+            db.session.commit()
+            flash(f"As the book ‘{book.title}’ was the only book in our library,"
+                  f" its author ‘{author.name}’ was also successfully deleted.")
+        else:
+            flash(f'The book "{book.title}" has been successfully deleted.')
+
+    except Exception as e:
+        db.session.rollback()
+        flash(f'An error occurred while trying to delete the book: {str(e)}', 'danger')
+
+    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":
