@@ -66,23 +66,24 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+
 .sort_items {
     background: var(--light-background);
     border-radius: 8px;
     padding: 10px;
     margin: var(--mb-4) 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .sort_items form {
     display: flex;
     align-items: center;
-    width: 100%;
+    gap: 10px; /* Space between elements */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 .sort_items label {
@@ -91,23 +92,31 @@ body {
     margin-right: 10px;
 }
 
-.sort_items select {
+.sort_items select,
+.search_input,
+#authors_button,
+#books_button{
     padding: 8px 12px;
     border: 1px solid var(--mid-background);
     border-radius: 4px;
     font-size: var(--normal-font-size);
-    margin-right: 20px; /* Space between selects */
     background: #fff;
     color: var(--dark-text);
     transition: border-color 0.3s ease;
 }
 
-.sort_items select:focus {
+.sort_items select:focus,
+.search_input:focus,
+#authors_button:focus,
+#books_button: focus {
     border-color: var(--button-color);
     outline: none;
 }
 
-.sort_items button {
+.sort_items button,
+.search_query button,
+#authors_button,
+#books_button {
     padding: 10px 20px;
     background: var(--button-color);
     border: none;
@@ -118,7 +127,10 @@ body {
     transition: background 0.3s, transform 0.3s;
 }
 
-.sort_items button:hover {
+.sort_items button:hover,
+.search_query button:hover,
+#authors_button:hover,
+#books_button:hover {
     background: var(--button-hover-color);
     transform: translateY(-2px);
 }
@@ -164,31 +176,48 @@ td {
     color: var(--dark-text);
 }
 
-button {
-    padding: 12px 20px;
+button,
+a.button {
+    padding: 10px 20px;
     background: var(--button-color);
     border: none;
     border-radius: 4px;
     color: #fff;
     font-size: var(--normal-font-size);
     cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Remove underline from links */
     transition: background 0.3s, transform 0.3s;
-    flex-shrink: 0; /* Prevents button from shrinking */
+    display: inline-block;
+    margin: 0 10px;
 }
 
-button:hover {
+button:hover,
+a.button:hover {
     background: var(--button-hover-color);
     transform: translateY(-2px);
 }
 
-.flash-message {
-    background: var(--flash-bg-color);
-    color: var(--darker-text);
-    padding: 10px;
+.flash-messages {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: var(--flash-bg-color); /* Use a variable or any color of your choice */
+    border-left: 5px solid var(--flash-border-color); /* Optional for a flash message effect */
     border-radius: 4px;
-    margin-bottom: var(--mb-4);
-    border-left: 4px solid var(--flash-border-color);
-    animation: fadeIn 0.5s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.flash-messages-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash-message {
+    color: var(--darker-text); /* Use a contrasting text color */
+    font-size: var(--normal-font-size); /* Font size consistent with your design */
 }
 
 @media (max-width: 600px) {
