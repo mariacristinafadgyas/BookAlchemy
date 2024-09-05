@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_migrate import Migrate
 from get_cover_image import get_cover_image, get_description
 import os
-
+from sqlalchemy import func
 
 load_dotenv()
 flash_key = os.getenv('flash_key')
@@ -85,6 +85,11 @@ def add_authors():
             flash("The date of death cannot be earlier than the birth date.")
             return redirect(url_for('add_authors'))
 
+        existing_author = Author.query.filter(func.lower(Author.name) == func.lower(name)).first()
+        if existing_author:
+            flash('An author with this name already exists.')
+            return redirect(url_for('add_authors'))
+
         new_author = Author(name=name, birth_date=birth_date, date_of_death=date_of_death)
 
         # Add to the session and commit to the database
@@ -105,6 +110,11 @@ def add_books():
         publication_year = request.form.get('publication_year')
         author_id = request.form.get('author_id')
 
+        existing_book = Book.query.filter(func.lower(Book.title) == func.lower(title)).first()
+        if existing_book:
+            flash('A book with this title already exists. Please choose a different title.')
+            return redirect(url_for('add_books'))
+
         try:
             publication_year = int(publication_year)
             current_year = datetime.now().year
@@ -124,11 +134,10 @@ def add_books():
         cover_image = get_cover_image(isbn)
         if cover_image is None:
             cover_image = url_for('static', filename='book.jpeg')
-            print(type(cover_image))
+
         description = get_description(isbn)
         if description is None:
             description = 'Description currently unavailable'
-            print(type(description))
 
         new_book = Book(
             title=title,
