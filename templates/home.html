@@ -26,6 +26,11 @@
     {% endwith %}
 
     <div class="sort_items">
+        <div class="color-picker">
+            <!-- <label for="hue-slider">Select Website Color (0-255):</label>-->
+            <input type="range" id="hue-slider" min="0" max="255" value="58">
+            <span id="hue-value">58</span>
+        </div>
         <form method="get" action="{{ url_for('home') }}">
             <label for="sort_by">Sort by:</label>
             <select id="sort_by" name="sort_by">
@@ -110,6 +115,6 @@
             </table>
         </div>
     </div>
-    <script src="home.js"></script>
+    <script src="/static/home.js"></script>
 </body>
 </html>

@@ -15,8 +15,8 @@
   --button-hover-color: hsl(var(--hue-color), 80%, 45%); /* Button color on hover */
   --flash-bg-color: hsl(var(--hue-color), 90%, 95%); /* Flash message background color */
   --flash-border-color: hsl(var(--hue-color), 80%, 75%); /* Flash message border color */
-   --del-button-color: hsl(var(--hue-color), 10%, 40%); /* Delete button color */
-   --del-button-hover-color: hsl(var(--hue-color), 30%, 20%); /* Delete button color */
+  --del-button-color: hsl(var(--hue-color), 10%, 40%); /* Delete button color */
+  --del-button-hover-color: hsl(var(--hue-color), 30%, 20%); /* Delete button color */
 
   /*===== Fonts and Typography =====*/
   --body-font: "Poppins", sans-serif;
@@ -242,6 +242,45 @@ a.button:hover {
 .flash-message {
     color: var(--darker-text); /* Use a contrasting text color */
     font-size: var(--normal-font-size); /* Font size consistent with your design */
+}
+
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default slider styling */
+    width: 100%;
+    height: 5px;
+    background: #ddd; /* Slider track color */
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default thumb styling */
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white; /* Default thumb color */
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out; /* Smooth transition */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white; /* Default thumb color */
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out; /* Smooth transition */
+}
+
+input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white; /* Default thumb color */
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out; /* Smooth transition */
 }
 
 @media (max-width: 600px) {

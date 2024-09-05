@@ -43,5 +43,25 @@
         </form>
     </div>
 
+    <script>
+
+        function applyHueToCSS(hue) {
+            document.documentElement.style.setProperty('--hue-color', hue);
+            document.documentElement.style.setProperty('--first-color', `hsl(${hue}, 89%, 97%)`);
+            document.documentElement.style.setProperty('--second-color', `hsl(${hue}, 6%, 82%)`);
+            document.documentElement.style.setProperty('--third-color', `hsl(${hue}, 16%, 1%)`);
+            document.documentElement.style.setProperty('--forth-color', `hsl(${hue}, 1%, 20%)`);
+            document.documentElement.style.setProperty('--button-color', `hsl(${hue}, 89%, 60%)`);
+            document.documentElement.style.setProperty('--flash-bg-color', `hsl(${hue}, 89%, 90%)`);
+            document.documentElement.style.setProperty('--flash-border-color', `hsl(${hue}, 89%, 70%)`);
+
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hue = localStorage.getItem('hue') || 58; // Default to 58 if no hue is found in localStorage
+            applyHueToCSS(hue);
+        });
+    </script>
+
 </body>
 </html>
