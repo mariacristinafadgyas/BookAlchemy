@@ -3,8 +3,9 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_migrate import Migrate
-from get_cover_image import *
+from get_data import *
 import os
+import random
 from sqlalchemy import func
 
 load_dotenv()
@@ -222,6 +223,21 @@ def delete_author(author_id):
         flash('An error occurred while deleting the author and associated books. Please try again.')
 
     return redirect(url_for('home'))
+
+
+@app.route('/suggest_book', methods=['GET'])
+def suggest_book():
+    titles = Book.query.all()
+    if not titles:
+        flash('No books available for suggestion.')
+        return redirect(url_for('home'))
+
+    title = random.choice(titles).title
+    suggestion_response = get_suggestion(title)
+
+    book = Book.query.filter_by(title=title).first_or_404()
+
+    return render_template('suggest_book.html', book=book, suggestion=suggestion_response)
 
 
 if __name__ == "__main__":

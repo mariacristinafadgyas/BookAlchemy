@@ -13,6 +13,8 @@
   --forth-color: hsl(var(--hue-color), 1%, 20%); /* Darker shade for contrast */
   --fifth-color: hsl(var(--hue-color), 89%, 90%); /* Shade for list */
   --button-color: hsl(var(--hue-color), 89%, 60%); /* Button color using hue */
+  --suggestion-color:  hsl(var(--hue-color), 20%, 94%); /* Suggetion div color using hue */
+  --h3-color:  hsl(var(--hue-color), 30%, 39%); /* h3 suggestion div color using hue */
 
   /*===== Fonts and Typography =====*/
   --body-font: "Poppins", sans-serif;
@@ -134,6 +136,71 @@ body {
 .book-details p {
     margin: 5px 0;
     font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    .book-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-cover img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .my_library_button {
+        font-size: 0.9rem;
+    }
+}
+
+.suggestion-text {
+    background: var(--suggestion-color);
+    padding: var(--mb-4);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--mb-5);
+    margin-top: var(--mb-5);
+    opacity: 0;
+    animation: appear 1s forwards;
+    position: relative;
+}
+
+.suggestion-text h3 {
+    margin: 0 0 var(--mb-2) 0;
+    font-size: var(--h2-font-size);
+    animation: slideIn 3s ease-in-out;
+    color: var( --h3-color);
+}
+
+.suggestion-text p {
+    font-size: var(--normal-font-size);
+    color: var(--third-color);
+}
+
+/* Keyframes for animations */
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
 @media (max-width: 600px) {
