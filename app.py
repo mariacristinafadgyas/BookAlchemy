@@ -120,12 +120,24 @@ def add_books():
             flash('Selected author does not exist.')
             return redirect(url_for('add_books'))
 
-        # Fetch the cover image URL using the ISBN
+        # Fetch the cover image URL and description using the ISBN
         cover_image = get_cover_image(isbn)
         if cover_image is None:
             cover_image = url_for('static', filename='book.jpeg')
+            print(type(cover_image))
+        description = get_description(isbn)
+        if description is None:
+            description = 'Description currently unavailable'
+            print(type(description))
 
-        new_book = Book(title=title, author=author, isbn=isbn, publication_year=publication_year, cover_image=cover_image)
+        new_book = Book(
+            title=title,
+            author=author,
+            isbn=isbn,
+            publication_year=publication_year,
+            cover_image=cover_image,
+            description=description
+        )
 
         db.session.add(new_book)
         db.session.commit()
@@ -177,6 +189,25 @@ def book_details(book_id):
     book = Book.query.get_or_404(book_id)
 
     return render_template('book_details.html', book=book)
+
+
+@app.route('/author/<int:author_id>/delete', methods=['POST'])
+def delete_author(author_id):
+    author = Author.query.get(author_id)
+
+    if author is None:
+        flash('Author not found!')
+        return redirect(url_for('home'))
+
+    try:
+        db.session.delete(author)
+        db.session.commit()
+        flash('Author and all associated books successfully deleted!')
+    except Exception as e:
+        db.session.rollback()
+        flash('An error occurred while deleting the author and associated books. Please try again.')
+
+    return redirect(url_for('home'))
 
 
 if __name__ == "__main__":
