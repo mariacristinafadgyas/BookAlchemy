@@ -19,6 +19,13 @@
             </div>
             <div class="book_details">
                 <p><strong>Author:</strong> <a href="{{ url_for('author_details', author_id=book.author.author_id) }}">{{ book.author.name }}</a></p>
+                <p><strong>Rating:</strong>
+                    {% if book.rating == 0.0 %}
+                        Unrated
+                    {% else %}
+                        {{ book.rating }}
+                    {% endif %}
+                </p>
                 <p><strong>ISBN:</strong> {{ book.isbn }}</p>
                 <p><strong>Publication Year:</strong> {{ book.publication_year }}</p>
                 <p><strong>Description:</strong> {{ book.description }}</p></p>

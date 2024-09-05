@@ -33,9 +33,31 @@ def get_description(isbn):
     return None
 
 
+def get_rating(isbn):
+    """Fetch average rating from Google Books API using ISBN."""
+    url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        if 'items' in data and len(data['items']) > 0:
+            for index in [0, 1]:
+                try:
+                    book_info = data['items'][index]['volumeInfo']
+                    rating = book_info.get('averageRating')
+                    if rating:
+                        return rating
+                except (IndexError, KeyError, TypeError):
+                    continue
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred while fetching data from the API: {e}")
+    return None
+
+
 def main():
-    print(get_cover_image(9780553108033))
-    print(get_description(9780553108033))
+    print(get_cover_image(9780553103540))
+    print(get_description(9780553103540))
+    print(get_rating(9780553103540))
 
 
 if __name__ == "__main__":

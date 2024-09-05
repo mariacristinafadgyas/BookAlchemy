@@ -58,6 +58,7 @@
                     <tr>
                         <th>Cover</th>
                         <th>Title</th>
+                        <th>Rating</th>
                         <th>ISBN</th>
                         <th>Publication Year</th>
                         <th>Author</th>
@@ -75,6 +76,13 @@
                                 <a href="{{ url_for('book_details', book_id=book.book_id) }}">
                                     {{ book.title }}
                                 </a>
+                            </td>
+                            <td>
+                                {% if book.rating == 0.0 %}
+                                    Unrated
+                                {% else %}
+                                    {{ book.rating }}
+                                {% endif %}
                             </td>
                             <td>{{ book.isbn }}</td>
                             <td>{{ book.publication_year }}</td>

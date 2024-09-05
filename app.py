@@ -3,7 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_migrate import Migrate
-from get_cover_image import get_cover_image, get_description
+from get_cover_image import *
 import os
 from sqlalchemy import func
 
@@ -139,13 +139,18 @@ def add_books():
         if description is None:
             description = 'Description currently unavailable'
 
+        rating = get_rating(isbn)
+        if rating is None:
+            rating = 0.0
+
         new_book = Book(
             title=title,
             author=author,
             isbn=isbn,
             publication_year=publication_year,
             cover_image=cover_image,
-            description=description
+            description=description,
+            rating=rating
         )
 
         db.session.add(new_book)
