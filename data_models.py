@@ -4,6 +4,8 @@ db = SQLAlchemy()  # Creates a db object
 
 
 class Author(db.Model):
+    """Defines the structure of the 'authors' table in the database,
+    with attributes corresponding to the author"""
     __tablename__ = 'authors'
 
     author_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -17,6 +19,8 @@ class Author(db.Model):
 
 
 class Book(db.Model):
+    """Defines the structure of the 'books' table in the database,
+       with attributes corresponding to the book"""
     __tablename__ = 'books'
 
     book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)

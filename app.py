@@ -17,7 +17,7 @@ app.secret_key = flash_key
 base_dir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_dir, "data", "library.sqlite")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app) # Connects the Flask app to the flask-sqlalchemy code
+db.init_app(app)  # Connects the Flask app to the flask-sqlalchemy code
 
 migrate = Migrate(app, db)
 
@@ -28,6 +28,13 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def home():
+    """Renders the homepage of the library application, displaying a list of
+    books with sorting and search functionalities. retrieves books from the
+    database, allowing users to sort the results by title, author, or publication
+    year. Users can also search for books or authors by entering a query. Renders
+    the 'home.html' template with the list of books, including sorting and search
+    parameters."""
+
     sort_by = request.args.get('sort_by', 'title')  # Default to sorting by title
     sort_order = request.args.get('sort_order', 'asc')  # Default to ascending order
     search_query = request.args.get('search_query', '').strip()
@@ -58,6 +65,11 @@ def home():
 
 @app.route('/add_author', methods=['GET', 'POST'])
 def add_authors():
+    """ Handles the addition of new authors to the library database. For a GET request,
+    this function outputs the ‘add_authors’ form for user input.When a
+    POST request is made, the form is processed to add a new author with
+    details such as name, date of birth and date of death."""
+
     if request.method == 'POST':
         name = request.form.get('name')
         birth_date_str = request.form.get('birth_date')
@@ -73,7 +85,7 @@ def add_authors():
                 birth_date = datetime.strptime(birth_date_str, date_format).date()
             else:
                 None
-            if date_of_death_str: # Validate the date of death
+            if date_of_death_str:  # Validate the date of death
                 date_of_death = datetime.strptime(date_of_death_str, date_format).date()
             else:
                 None
@@ -105,6 +117,12 @@ def add_authors():
 
 @app.route('/add_book', methods=['GET', 'POST'])
 def add_books():
+    """Handles the addition of new books to the library database. For a GET request,
+     this function renders the form ‘add_books'.When a POST request is made, it
+     processes the form submission to add a new book with details such as title,
+     ISBN, year of publication and author, and the cover image, description and
+     rating of the book are retrieved from an API."""
+
     if request.method == 'POST':
         title = request.form.get('title')
         isbn = request.form.get('isbn')
@@ -166,6 +184,9 @@ def add_books():
 
 @app.route('/book/<int:book_id>/delete', methods=['POST'])
 def delete_book(book_id):
+    """Deletes a specific book and its associated author if the book is the
+     author's only entry in the library. Returns a redirect to the home page
+      after the deletion."""
     book = Book.query.get_or_404(book_id)
     author = book.author
     print(author)
@@ -193,6 +214,10 @@ def delete_book(book_id):
 
 @app.route('/author/<int:author_id>')
 def author_details(author_id):
+    """Displays the details of a specific author and their associated books
+     and returns a rendered template of 'author_details.html' with the
+      author's details and their books."""
+
     author = Author.query.get_or_404(author_id)
     books = Book.query.filter_by(author_id=author_id).all()
 
@@ -201,6 +226,9 @@ def author_details(author_id):
 
 @app.route('/book/<int:book_id>', methods=['GET'])
 def book_details(book_id):
+    """Displays the details of a specific book and returns a rendered
+     template of 'book_details.html' with the book's details"""
+
     book = Book.query.get_or_404(book_id)
 
     return render_template('book_details.html', book=book)
@@ -208,6 +236,9 @@ def book_details(book_id):
 
 @app.route('/author/<int:author_id>/delete', methods=['POST'])
 def delete_author(author_id):
+    """Deletes an author and all associated books from the database. Returns a
+     redirect response to the 'home' route."""
+
     author = Author.query.get(author_id)
 
     if author is None:
@@ -227,6 +258,10 @@ def delete_author(author_id):
 
 @app.route('/suggest_book', methods=['GET'])
 def suggest_book():
+    """Suggests a book to the user by randomly selecting one from the database
+     and returns a rendered template of 'suggest_book.html' with the selected
+      book details and suggestion. Redirects to 'home' if no books are available."""
+
     titles = Book.query.all()
     if not titles:
         flash('No books available for suggestion.')

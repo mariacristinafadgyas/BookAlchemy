@@ -60,6 +60,9 @@ def get_rating(isbn):
 
 
 def get_suggestion(title):
+    """Generates a short suggestion for why the given book title should
+     be read by sending a request to an external API using the book's title"""
+
     # First API - It is very slow
     # url = "https://chatgpt-42.p.rapidapi.com/conversationgpt4-2"
     #
