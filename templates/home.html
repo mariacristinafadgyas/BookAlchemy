@@ -68,6 +68,7 @@
                         <th>ISBN</th>
                         <th>Publication Year</th>
                         <th>Author</th>
+                        <th>Buy</th>
                         <th></th>
                         <th>Action</th>
                     </tr>
@@ -96,6 +97,17 @@
                                 <a href="{{ url_for('author_details', author_id=book.author_id) }}">
                                     {{ book.author.name }}
                                 </a>
+                            </td>
+                            <td>
+                                {% if book.purchase_link and book.purchase_link != 'Not available' %}
+                                    <p>
+                                        <a href="{{ book.purchase_link }}" target="_blank" class="purchase-link">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </a>
+                                    </p>
+                                {% else %}
+                                    <i class="fas fa-ban" aria-hidden="true" id="not-available"></i>
+                                {% endif %}
                             </td>
                             <td>
                                 <form action="{{ url_for('delete_author', author_id=book.author_id) }}" method="POST" style="display:inline;">

@@ -31,6 +31,7 @@ class Book(db.Model):
     cover_image = db.Column(db.String(255), nullable=True)
     description = db.Column(db.String(255), nullable=True)
     rating = db.Column(db.Float, nullable=True)
+    purchase_link = db.Column(db.String(255), nullable=True)
 
     def __repr__(self):
         return f"Book: {self.title}, published in {self.publication_year}"

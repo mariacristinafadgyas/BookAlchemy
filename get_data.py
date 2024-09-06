@@ -6,6 +6,7 @@ import requests
 load_dotenv()
 gpt_key = os.getenv('gpt_key')
 
+
 def get_cover_image(isbn):
     """Fetch cover image URL from Google Books API using ISBN."""
     url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
@@ -56,6 +57,18 @@ def get_rating(isbn):
                     continue
     except requests.exceptions.RequestException as e:
         print(f"An error occurred while fetching data from the API: {e}")
+    return None
+
+
+def get_link_to_buy(isbn):
+    """Fetch cover image URL from Google Books API using ISBN."""
+    url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn}"
+    response = requests.get(url)
+    data = response.json()
+    if 'items' in data:
+        book_info = data['items'][0]['volumeInfo']
+        # print(book_info)
+        return book_info.get('canonicalVolumeLink')
     return None
 
 
@@ -140,10 +153,11 @@ def get_suggestion(title):
 
 
 def main():
-    print(get_cover_image(9780553103540))
-    print(get_description(9780553103540))
-    print(get_rating(9780553103540))
-    print(get_suggestion('A Tale of Two Cities'))
+    # print(get_cover_image(9780553103540))
+    # print(get_description(9780553103540))
+    # print(get_rating(9780553103540))
+    print(get_link_to_buy(9780747542155))
+    # print(get_suggestion('A Tale of Two Cities'))
 
 
 if __name__ == "__main__":

@@ -199,7 +199,9 @@ a.button:hover {
     transform: translateY(-2px);
 }
 
-#delete-author-btn {
+#delete-author-btn,
+.purchase-link,
+#not-available {
     background: transparent;
     border: none;
     padding: 0;
@@ -214,11 +216,15 @@ a.button:hover {
     transition: color 0.3s ease;
 }
 
-#delete-author-btn:hover {
+#delete-author-btn:hover,
+.purchase-link:hover,
+#not-available:hove {
     color: var( --del-button-hover-color);
 }
 
-#delete-author-btn:focus {
+#delete-author-btn:focus,
+.purchase-link:focus,
+#not-available {
     outline: none;
 }
 

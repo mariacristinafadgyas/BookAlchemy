@@ -162,6 +162,10 @@ def add_books():
         if rating is None:
             rating = 0.0
 
+        purchase_link = get_link_to_buy(isbn)
+        if purchase_link is None:
+            purchase_link = 'Not available'
+
         new_book = Book(
             title=title,
             author=author,
@@ -169,7 +173,8 @@ def add_books():
             publication_year=publication_year,
             cover_image=cover_image,
             description=description,
-            rating=rating
+            rating=rating,
+            purchase_link = purchase_link
         )
 
         db.session.add(new_book)
