@@ -1,6 +1,7 @@
 # My Library
 
-This is a web-based Book Library Management System built using Flask and SQLAlchemy. It allows users to manage books and authors, including adding, deleting, and viewing details. Additionally, it includes functionality for customizing the UI appearance and providing book suggestions.
+This is a web-based Book Library Management System built using Flask and SQLAlchemy. It allows users to manage books and authors, including adding, deleting, and viewing details. It also offers features for customizing the user interface and generating book suggestions.
+Additionally, users now have the ability to view purchase links for books.
 
 ## Features
 
@@ -22,6 +23,11 @@ This is a web-based Book Library Management System built using Flask and SQLAlch
 
 - **Book Suggestions**
   - Get book suggestions based on a randomly selected book from the library.
+
+- **Purchase Links**
+- View links to purchase books directly from external sources.
+- Purchase links for books are fetched using the Google Books API and are displayed as a shopping cart icon on the book details page.
+- If the purchase link is not available, an icon will be displayed to indicate that the item is unavailable.
 
 ## Installation
 
@@ -61,7 +67,7 @@ python app.py
 - URL: **/add_book**
 - Method: **GET, POST**
 - Description: Form for adding new books. Handles validation and error messages.
-###Add Author
+### Add Author
 - URL: **/add_author**
 - Method: **GET, POST**
 - Description: Form for adding new authors. Includes validation for dates.
